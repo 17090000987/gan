@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>decoder</title>
+</head>
+<body>
+
+<div>
+    <a>ws_url</a>
+    <input style="width: 300px;height: 30px;" id="ws_url" type="text" value="">
+</div>
+
+<div style="margin-top: 6px"></div>
+
+<div class="div-inline">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <canvas id="canvas" width="300px" height="200px" style="background-color: #F0F0F0;"></canvas>
+    </div>
+</div>
+
+<script src="pcm-player.js"></script>
+<script src="webgl.js"></script>
+<script src="ganplayer.js"></script>
+<script type='text/javascript'>
+
+    document.getElementById('ws_url').value = "ws://"+window.location.host+"/ws/rtsp";
+    document.getElementById('input_video').value = "rtsp://admin:admin123@192.168.10.104";
+    var mPlayer = [];
+    function playAction() {
+        var url = document.getElementById('ws_url').value;
+        play(0,'canvas', url, document.getElementById('input_video').value);
+    }
+
+    function play(i,canvasId,wsUri,rtsp) {
+        var canvas = document.getElementById(canvasId);
+        var player = mPlayer[i];
+        if(player){
+            player.stop();
+        }else{
+            player = mPlayer[i] = new GanPlayer(canvas,wsUri);
+        }
+        player.play(rtsp);
+    }
+
+</script>
+
+</body>
+</html>

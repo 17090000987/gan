@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>WebSocket Test</title>
+<script src="../js/ganplayer.js"></script>
+<script src="../js/base.js"></script>
+<div id="output"></div>
+
+<style>
+    .div-inline {
+        display: inline;
+        float: left;
+    }
+</style>
+
+<div >
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction()">播放</button>
+    </div>
+</div>
+
+<div>
+    <div class="div-inline">
+        <div style="margin-top: 20px">
+            <video controls id="video" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div style="margin-top: 20px">
+            <video controls id="video1" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div style="margin-top: 20px">
+            <video controls id="video2" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div style="margin-top: 20px">
+            <video controls id="video3" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div>
+
+        <div class="div-inline">
+            <div style="margin-top: 20px">
+                <video controls id="video4" width="300px" height="300px"></video>
+            </div>
+        </div>
+
+        <div class="div-inline" style="margin-left: 20px">
+            <div style="margin-top: 20px">
+                <video controls id="video5" width="300px" height="300px"></video>
+            </div>
+        </div>
+
+        <div class="div-inline" style="margin-left: 20px">
+            <div style="margin-top: 20px">
+                <video controls id="video6" width="300px" height="300px"></video>
+            </div>
+        </div>
+
+        <div class="div-inline" style="margin-left: 20px">
+            <div style="margin-top: 20px">
+                <video controls id="video7" width="300px" height="300px"></video>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var url = "ws://" + window.location.host + "/ws/rtsp";
+    var rtsp = "rtsp://192.168.1.18:655/vag://192.168.1.18:7302:51010100001310013304:0:MAIN:TCP";
+    document.getElementById('input_video').value = rtsp
+    function playAction() {
+        play(0,'video', url, document.getElementById('input_video').value);
+        play(1,'video1', url, document.getElementById('input_video').value);
+        play(2,'video2', url, document.getElementById('input_video').value);
+        play(3,'video3', url, document.getElementById('input_video').value);
+        play(4,'video4', url, document.getElementById('input_video').value);
+        play(5,'video5', url, document.getElementById('input_video').value);
+        play(6,'video6', url, document.getElementById('input_video').value);
+        play(7,'video7', url, document.getElementById('input_video').value);
+    }
+
+    var mPlayer = [];
+    function play(i,videoid,wsUri,rtsp) {
+        var video = document.getElementById(videoid);
+        var player = mPlayer[i];
+        if(player){
+            player.stop();
+        }else{
+            player = mPlayer[i] = new GanPlayer(video,wsUri)
+        }
+        player.play(rtsp);
+    }
+</script>
+
+</html>

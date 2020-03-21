@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>WebSocket Test</title>
+<script src="../../js/wsplayer.js"></script>
+<script src="../../js/base.js"></script>
+<div id="output"></div>
+
+<style>
+    .div-inline {
+        display: inline;
+        float: left;
+    }
+</style>
+
+<div class="div-inline">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video1" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction1()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video1" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video2" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction2()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video2" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video3" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction3()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video3" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div>
+
+    <div class="div-inline">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video4" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction4()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video4" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video5" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction5()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video5" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video6" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction6()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video6" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video7" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction7()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video7" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    var url = "ws://" + window.location.host + "/ws/rtsp";
+    document.getElementById('input_video').value = "rtsp://" + getHostWithoutPort() + ":556/replay?" +
+        "deviceId=123123&channel=1&filePath=/var/disk0/rec_file/rec0004.cv1&position=0";
+
+    function playAction() {
+        replay('video', url, document.getElementById('input_video').value);
+    }
+
+    document.getElementById('input_video1').value = "rtsp://" + getHostWithoutPort() + ":556/replay?" +
+        "deviceId=123123&channel=1&filePath=/var/disk0/rec_file/rec0004.cv1&position=0";
+    function playAction1() {
+        replay('video1', url, document.getElementById('input_video1').value);
+    }
+
+    document.getElementById('input_video2').value = "rtsp://" + getHostWithoutPort() + ":556/replay?" +
+        "deviceId=123123&channel=1&filePath=/var/disk0/rec_file/rec0004.cv1&position=0";
+    function playAction2() {
+        replay('video2', url, document.getElementById('input_video2').value);
+    }
+
+    document.getElementById('input_video3').value = "rtsp://" + getHostWithoutPort() + ":556/replay?" +
+        "deviceId=123123&channel=1&filePath=/var/disk0/rec_file/rec0004.cv1&position=0";
+    function playAction3() {
+        replay('video3', url, document.getElementById('input_video3').value);
+    }
+
+    document.getElementById('input_video4').value = "rtsp://" + getHostWithoutPort() + ":554/replay?" +
+        "deviceId=123123&channel=1&filePath=/var/disk0/rec_file/rec0004.cv1&position=0";
+    function playAction4() {
+        play2('video4', url, document.getElementById('input_video4').value);
+    }
+
+    document.getElementById('input_video5').value = "rtsp://" + getHostWithoutPort() + ":554/800.sdp";
+    function playAction5() {
+        replay('video5', url, document.getElementById('input_video5').value);
+    }
+
+    document.getElementById('input_video6').value = "rtsp://" + getHostWithoutPort() + ":554/800.sdp";
+    function playAction6() {
+        replay('video6', url, document.getElementById('input_video6').value);
+    }
+
+    document.getElementById('input_video7').value = "rtsp://" + getHostWithoutPort() + ":554/800.sdp";
+    function playAction7() {
+        replay('video7', url, document.getElementById('input_video7').value);
+    }
+
+    function replay(videoid,wsUri,rtsp) {
+        var params = rtsp.substring(rtsp.indexOf("?")+1);
+        var http = "/device/replay";
+        asyncHttp(http, params, function(xmlhttp){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                var responseText = xmlhttp.responseText;//返回结果
+                var json = JSON.parse(responseText);
+                var streamId = json.data;
+                play(videoid,wsUri,streamId,0);
+            }
+        });
+    }
+
+</script>
+
+</html>

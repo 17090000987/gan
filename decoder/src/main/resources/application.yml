@@ -1,0 +1,10 @@
+decoder:
+    debug: true
+
+server:
+    port: 88
+    tomcat:
+        maxHttpHeaderSize: 20480000
+spring:
+    resources:
+        static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}

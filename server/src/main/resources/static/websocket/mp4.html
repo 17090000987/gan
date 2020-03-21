@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<script src="../js/wsplayer.js"></script>
+<script src="../js/base.js"></script>
+<h2>WebSocket Test</h2>
+<div id="output"></div>
+<div style="padding-top: 30px;padding-bottom: 30px;">
+    <p>请输入rtsp地址</p>
+    <input style="width: 240px;height: 40px;" id="input_video" type="text" value="">
+    <button style="width: 100px;height: 40px" onclick="playAction()">播放</button>
+</div>
+<video id="video1" width="600px" height="400px"></video>
+
+<script type="text/javascript">
+document.getElementById('input_video').value = "rtsp://"+getHostWithoutPort()+":554/800.sdp";
+function playAction(){
+	var url = "ws://"+window.location.host+"/ws/rtsp";
+	play('video1',url,document.getElementById('input_video').value,0);
+}
+</script>
+
+</html>

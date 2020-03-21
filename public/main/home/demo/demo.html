@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/player/xplayer.js"></script>
+    <script src="home/demo/demo.js"></script>
+</head>
+<body>
+<div style="position: relative">
+    <img src="home/demo/img/welcome.jpg" style="position: absolute;width: 100%">
+    <div style="position:absolute;width: 100%;text-align:center;padding-top: 30px;padding-bottom: 30px;">
+        <a>请输入rtsp地址</a>
+        <input style="width: 200px;height: 30px;" id="input_video" type="text" value="">
+        <button style="width: 100px;height: 35px" onclick="Demo.play()">播放</button>
+        <button style="width: 100px;height: 35px" onclick="Demo.stop()">停止</button>
+        <p style="margin-top: 20px">
+            <div id="demo_video" style="width: 500px"></div>
+        </p>
+    </div>
+</div>
+</body>
+</html>

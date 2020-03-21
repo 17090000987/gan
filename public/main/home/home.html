@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Gan</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
+    <!-- Custom styles for this template -->
+    <link href="home/home.css" rel="stylesheet">
+</head>
+<body>
+
+<div role="main" style="position:relative;height: 450px">
+    <img style="width:100%;height: 450px;position: absolute; top: 0; right: 0; border: 0;z-index: -1" src="home/img/welcome.jpg">
+    <div style="align-items: center">
+        <div class="container" style="padding-top: 100px;z-index: 1">
+            <h1 class="display-3">流媒体服务器</h1>
+            <p>这是一个实现rtsp传输协议的流媒体服务器，提供一站式多接入流媒体解决方案，支持rtsp推流拉流，浏览器无插件低延迟播放rtsp,GB28181，sip协议，海康，大华摄像头接入</p>
+            <p><a href="https://gitee.com/gan30/gan" target="_blank" class="btn btn-primary btn-lg" role="button" style="min-width: 100px;text-align: center">下载</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 50px">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<footer class="container">
+    <p>&copy; Company 2017-2019</p>
+</footer>
+
+<script>
+    Tab.current.page.onCreate=function(){
+        console.log("home onCreate");
+    }
+    Tab.current.page.onDestory=function(){
+        console.log("home onDestory");
+    }
+</script>
+
+</body>
+</html>

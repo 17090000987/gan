@@ -1,0 +1,141 @@
+.table {
+    background-color: #fff;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 2px;
+    font-size: 14px;
+    border: 1px solid #e3e8ec;
+}
+
+.table th, .table td {
+    text-align: center;
+}
+
+.table th, .table td {
+    background-color: #fff;
+    color: #676A6C;
+}
+
+.table > thead > tr > th {
+    /*position: relative;*/
+    color: #676A6C;
+    height: 36px;
+    line-height: 36px;
+    border-bottom: 2px solid #e3e8ec;
+    padding-left: 10px;
+}
+
+.table > thead > tr > th a {
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    cursor: pointer;
+}
+
+.table th a {
+    color: #676A6C;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-right: 1px solid #e3e8ec;
+    text-align: left;
+}
+
+.table > thead > tr > th:last-child, .table > tbody > tr > td:last-child {
+    border-right: none;
+}
+
+.table > tbody > tr > td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e3e8ec;
+    white-space: nowrap;
+}
+
+.table > tbody > tr > td .btn {
+    margin-right: 5px;
+    min-width: 45px;
+    height: 24px;
+    box-sizing: border-box;
+    line-height: 24px;
+    padding: 0 10px;
+}
+
+.table > tbody > tr:nth-child(odd) > td {
+    background-color: #fcfdff;
+}
+
+.table > thead > tr > th.s_sort {
+    padding: 0px 8px;
+}
+
+.table > thead > tr > th.s_sort a {
+    color: #676A6C;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    line-height: 36px;
+}
+
+.table > thead > tr > th.s_sort_choose a {
+    color: #FF6600;
+}
+
+.table > thead > tr > th, .table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.table > tbody tr:hover td {
+    background-color: #ebf0f5;
+}
+
+.table > tbody tr.tr_choose td {
+    background-color: #ebf0f5;
+}
+
+.table .td_val {
+    display: inline-block;
+}
+
+.table .th_val {
+    display: inline-block;
+}
+
+.table .th_label_txt {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.table .x-table-arrow span {
+    vertical-align: middle;
+    display: inline-block;
+    padding: 1px 2px;
+    top: 18px;
+    right: 15px;
+    cursor: pointer
+}
+
+.table .x-table-arrow span:before {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 13px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 5px solid #adaeb0;
+}
+
+.table .x-table-arrow span:after {
+    position: absolute;
+    display: block;
+    content: "";
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #adaeb0;
+}
+
+.table th a.x-table-arrowDown, .table th a.x-table-arrowUp {
+    color: #55a6e6;
+}

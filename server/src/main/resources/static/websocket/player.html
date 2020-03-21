@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<script src="../../js/ganplayer.js"></script>
+<script src="../../js/base.js"></script>
+<h2>WebSocket Test</h2>
+<div id="output"></div>
+<div style="padding-top: 30px;padding-bottom: 30px;">
+    <p>请输入rtsp地址</p>
+    <input style="width: 240px;height: 40px;" id="input_video" type="text" value="">
+    <button style="width: 100px;height: 40px" onclick="playAction()">播放</button>
+
+    <button style="width: 100px;height: 40px" onclick="seek()">seek</button>
+</div>
+<video id="video" controls></video>
+
+<script type="text/javascript">
+    // var rtsp = "rtsp://"+getHostWithoutPort()+":554/801.sdp";
+    var rtsp = "rtsp://admin:LVrY4dT84NveEtYdyxs=_pwdEX@122.193.18.105:6304/file/cvm://172.28.1.14:6021/tracks/32058488001310076950?range=20190424T000000-20190424T001349&recordtype=0&key=VdULDNNv6BNPnJINkuWR6Q==_pwd&vector=W4QOV9I97xpMnJALkufE7Q==_pwd&client=vlc&idinfo=EAAAAAAQAABi824V0EZcHaIXWNi7OKJUK0Ysw8P0WItQVU8LA5YzHx5RxoZ70FV7HxOVIWVreKUxNTU2MDkyMzIxNzI4";
+    document.getElementById('input_video').value = rtsp;
+    var wsUrl = "ws://"+window.location.host+"/ws/rtsp";
+    var player;
+
+    function playAction() {
+        if(player){
+            player.stop();
+        }
+        player = new GanPlayer(document.getElementById("video"),
+            wsUrl);
+        player.play(document.getElementById('input_video').value);
+    }
+
+    function seek() {
+        if(player){
+            player.seek(100);
+        }
+    }
+
+</script>
+
+</html>

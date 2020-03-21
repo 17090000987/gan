@@ -1,0 +1,35 @@
+.login_icon{
+    width: 150px;
+    height: 150px;
+    margin-top: 50px;
+}
+
+.login-section {
+    margin: 10% auto;
+    font-size: 14px;
+    width: 70%;
+    box-sizing: border-box;
+}
+
+.forget {
+    float: right;
+    color: dodgerblue;
+    font-size: 14px;
+}
+
+.register {
+    float: right;
+    color: dodgerblue;
+    font-size: 14px;
+}
+
+.login_btn{
+    width: 100%;
+    margin-top: 20px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    border:none;
+    background-color: orangered;
+}

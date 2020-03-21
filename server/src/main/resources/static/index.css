@@ -1,0 +1,9 @@
+html {
+    display: block;
+}
+
+#root{
+    margin: 0;
+    /*min-width: 640px;*/
+    position: relative;
+}

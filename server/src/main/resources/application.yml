@@ -1,0 +1,33 @@
+#ffmpeg
+ffmpeg:
+    path: D:/developer/ffmpeg/ffmpeg/
+
+#gan
+gan:
+    debug: true
+    log_level: 2
+
+    media:
+       rtsp_enable: true
+       rtsp_port: 554
+       rtspAutoFrameRate: true
+
+    #car
+    #GB28181
+    #JT1078
+server:
+    port: 8888
+    tomcat:
+        maxHttpHeaderSize: 20480000
+spring:
+    servlet:
+        multipart:
+            # Whether to enable support of multipart uploads.'
+            enabled: true
+            # Threshold after which files are written to disk.Values can use the suffixes "MB" or "KB" to indicate megabytes or kilobytes, respectively.
+            file-size-threshold: 0
+            max-file-size: 100MB # Max file size. Values can use the suffixes "MB"or "KB" to indicate megabytes or kilobytes, respectively.
+            max-request-size: 100MB # Max request size. Values can use the suffixes "MB" or "KB" to indicate megabytes or kilobytes, respectively.
+            resolve-lazily: false # Whether to resolve the multipart request lazily at the time of file or parameter access.
+    resources:
+        static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}

@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>XPlayer Test</title>
+
+<script src="xplayer.js"></script>
+<div id="output"></div>
+
+<style>
+    .div-inline {
+        display: inline;
+        float: left;
+    }
+</style>
+
+<div>
+    <a>ws_url</a>
+    <input style="width: 300px;height: 30px;" id="ws_url" type="text" value="">
+</div>
+
+<div style="margin-top: 6px"></div>
+
+<div class="div-inline">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction()">播放</button>
+        <div style="margin-top: 6px">
+            <button style="padding: 10px" onclick="fullscreen(0)">全屏</button>
+            <button style="padding: 10px" onclick="exitfullscreen(0)">退出全屏</button>
+            <button style="padding: 10px" onclick="pause(0)">暂停</button>
+            <button style="padding: 10px" onclick="resume(0)">继续</button>
+            <button style="padding: 10px" onclick="stop(0)">停止</button>
+        </div>
+    </div>
+    <div style="margin-top: 20px">
+        <div controls id="video" style="width:300px;height:300px"></div>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video1" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction1()">播放</button>
+        <div style="margin-top: 6px">
+            <button style="padding: 10px" onclick="fullscreen(1)">全屏</button>
+            <button style="padding: 10px" onclick="exitfullscreen(1)">退出全屏</button>
+            <button style="padding: 10px" onclick="pause(1)">暂停</button>
+            <button style="padding: 10px" onclick="resume(1)">继续</button>
+            <button style="padding: 10px" onclick="stop(1)">停止</button>
+        </div>
+    </div>
+    <div style="margin-top: 20px">
+        <div controls id="video1" style="width:300px;height:300px"></div>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video2" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction2()">播放</button>
+        <div style="margin: 6px">
+            <button style="padding: 10px" onclick="fullscreen(2)">全屏</button>
+            <button style="padding: 10px" onclick="exitfullscreen(2)">退出全屏</button>
+            <button style="padding: 10px" onclick="seek1000(2)">seek1000</button>
+        </div>
+    </div>
+    <div style="margin-top: 20px">
+        <div controls id="video2" style="width:300px;height:300px"></div>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video3" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction3()">播放</button>
+        <div style="margin: 6px">
+            <button style="padding: 10px" onclick="fullscreen(3)">全屏</button>
+            <button style="padding: 10px" onclick="exitfullscreen(3)">退出全屏</button>
+        </div>
+    </div>
+    <div style="margin-top: 20px">
+        <div controls id="video3" style="width:300px;height:300px"></div>
+    </div>
+</div>
+
+<div>
+    <div class="div-inline">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video4" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction4()">播放</button>
+            <div style="margin: 6px">
+                <button style="padding: 10px" onclick="fullscreen(4)">全屏</button>
+                <button style="padding: 10px" onclick="exitfullscreen(4)">退出全屏</button>
+            </div>
+        </div>
+        <div style="margin-top: 20px">
+            <div controls id="video4" style="width:300px;height:300px"></div>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video5" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction5()">播放</button>
+            <div style="margin: 6px">
+                <button style="padding: 10px" onclick="fullscreen(5)">全屏</button>
+                <button style="padding: 10px" onclick="exitfullscreen(5)">退出全屏</button>
+            </div>
+        </div>
+        <div style="margin-top: 20px">
+            <div controls id="video5" style="width:300px;height:300px"></div>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video6" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction6()">播放</button>
+            <div style="margin: 6px">
+                <button style="padding: 10px" onclick="fullscreen(6)">全屏</button>
+                <button style="padding: 10px" onclick="exitfullscreen(6)">退出全屏</button>
+            </div>
+        </div>
+        <div style="margin-top: 20px">
+            <div controls id="video6" style="width:300px;height:300px"></div>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video7" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction7()">播放</button>
+            <div style="margin: 6px">
+                <button style="padding: 10px" onclick="fullscreen(7)">全屏</button>
+                <button style="padding: 10px" onclick="exitfullscreen(7)">退出全屏</button>
+            </div>
+        </div>
+        <div style="margin-top: 20px">
+            <div controls id="video7" style="width:300px;height:300px"></div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    document.getElementById('ws_url').value = "ws://"+window.location.host+"/ws/rtsp";
+    document.getElementById('input_video').value = "rtsp://admin:admin123@192.168.10.104";
+    var mPlayer = [];
+    function playAction() {
+        var url = document.getElementById('ws_url').value;
+        play(0,'video', url, document.getElementById('input_video').value);
+    }
+
+    document.getElementById('input_video1').value = "rtsp://admin:admin123@192.168.10.104/cam/realmonitor?channel=1&subtype=1";
+    function playAction1() {
+        var url = document.getElementById('ws_url').value;
+        play(1,'video1', url, document.getElementById('input_video1').value);
+    }
+
+    document.getElementById('input_video2').value = "rtsp://admin:admin123@192.168.10.104";
+    function playAction2() {
+        var url = document.getElementById('ws_url').value;
+        play(2,'video2', url, document.getElementById('input_video2').value);
+    }
+
+    document.getElementById('input_video3').value = "rtsp://admin:admin123@192.168.10.104/cam/realmonitor?channel=1&subtype=1";
+    function playAction3() {
+        var url = document.getElementById('ws_url').value;
+        play(3,'video3', url, document.getElementById('input_video3').value);
+    }
+
+    document.getElementById('input_video4').value = "rtsp://admin:admin123@192.168.10.102";
+    function playAction4() {
+        var url = document.getElementById('ws_url').value;
+        play(4,'video4', url, document.getElementById('input_video4').value);
+    }
+
+    document.getElementById('input_video5').value = "rtsp://192.168.1.18:655/vag://192.168.1.18:7302:51010100001310013304:0:MAIN:TCP";
+    function playAction5() {
+        var url = document.getElementById('ws_url').value;
+        play(5,'video5', url, document.getElementById('input_video5').value);
+    }
+
+    document.getElementById('input_video6').value = "rtsp://" + getHostWithoutPort() + ":554/800.sdp";
+    function playAction6() {
+        var url = document.getElementById('ws_url').value;
+        play(6,'video6', url, document.getElementById('input_video6').value);
+    }
+
+    document.getElementById('input_video7').value = "rtsp://" + getHostWithoutPort() + ":554/800.sdp";
+    function playAction7() {
+        var url = document.getElementById('ws_url').value;
+        play(7,'video7', url, document.getElementById('input_video7').value);
+    }
+
+    function play(i,videoid,wsUri,rtsp) {
+        var video = document.getElementById(videoid);
+        var player = mPlayer[i];
+        if(player){
+            player.stop();
+        }else{
+            player = mPlayer[i] = new IPlayer(video,wsUri)
+        }
+        player.play(rtsp);
+    }
+
+    function fullscreen(i) {
+        var player = mPlayer[i];
+        if(player){
+            player.fullscreen();
+        }
+    }
+
+    function exitfullscreen(i) {
+        var player = mPlayer[i];
+        if(player){
+            player.exitfullscreen();
+        }
+    }
+
+    function pause(i) {
+        var player = mPlayer[i];
+        if(player){
+            console.log("pause");
+            player.pause();
+        }
+    }
+
+    function resume(i) {
+        var player = mPlayer[i];
+        if(player){
+            console.log("resume");
+            player.resume();
+        }
+    }
+
+    function stop(i) {
+        var player = mPlayer[i];
+        if(player){
+            console.log("stop");
+            player.stop();
+        }
+    }
+
+    function seek1000(i) {
+        var player = mPlayer[i];
+        if(player){
+            console.log("seek");
+            player.seek(1000);
+        }
+    }
+
+    function getHostWithoutPort(){
+        var host = window.location.host;
+        return host.substring(0,host.indexOf(":"));
+    }
+
+    function changeLayoutSize(i,width,height) {
+        var player = mPlayer[i];
+        if(player){
+            player.changeLayoutSize(width,height);
+        }
+    }
+
+</script>
+
+</html>

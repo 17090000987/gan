@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>  
+<html>  
+<head>
+<title>H5STREAM VIDEO</title>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/adapter.js"></script>
+<script src="js/platform.js"></script>
+<script src="js/h5splayer.js"></script>
+<script src="js/h5splayerhelper.js"></script>
+
+<link rel = "stylesheet" type = "text/css" href = "css/h5splayer.css" />
+
+</head>
+
+<body> 
+
+<div class="h5videodiv1">
+    <video class="h5video1" id="h5sVideo1" autoplay webkit-playsinline playsinline>
+
+    </video>
+    <div class="playpause" id="playpause1" ></div>
+</div>
+
+</body>
+
+<script>
+
+$(document).ready(function(){
+	console.log(platform.name); // 'Safari'
+	console.log(platform.version); // '11.1'
+	console.log(platform.product); // 'iPad'
+	console.log(platform.manufacturer); // 'Apple'
+	console.log(platform.layout); // 'WebKit'
+	console.log(platform.os.family); // 'iOS'
+	console.log(platform.description);// 'Safari 11.1 on Apple iPad (iOS 11.0)'
+
+	if (H5siOS() === true
+	|| H5sSafariBrowser() === true)
+	{
+		$('#h5sVideo1').prop("controls", true);
+	}
+
+	var strToken;
+	strToken = GetURLParameter("token");
+	if (strToken === undefined)
+	{
+		strToken = 'token1';
+	}
+	console.log("token", strToken);
+
+	var conf1 = {
+		videoid:'h5sVideo1',
+		protocol: window.location.protocol, //http: or https:
+		host: window.location.host, //localhost:8080
+		rootpath:'/', // '/'
+		token:strToken,
+		hlsver:'v1', //v1 is for ts, v2 is for fmp4
+		session:'c1782caf-b670-42d8-ba90-2244d0b0ee83' //session got from login
+	};
+
+	var v1 = new H5sPlayerWS(conf1);
+	if (GetURLParameter("autoplay") != undefined)
+	{
+		v1.connect();
+		$('#playpause1').fadeOut();
+	}
+
+	$('#h5sVideo1').parent().click(function () {
+		if($(this).children(".h5video1").get(0).paused){
+			$(this).children(".h5video1").get(0).play();
+			if(v1 != null)
+			{
+				v1.disconnect();
+				delete v1;
+				v1 = null;
+			}
+
+			v1 = new H5sPlayerWS(conf1);
+			
+			console.log(v1);
+			v1.connect();
+			
+			$(this).children(".playpause").fadeOut();
+		}else{
+			v1.disconnect();
+			delete v1;
+			v1 = null;
+			$(this).children(".h5video1").get(0).pause();
+			$(this).children(".playpause").fadeIn();
+		}
+	});
+
+});
+
+
+
+</script>
+
+</html> 

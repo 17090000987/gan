@@ -1,0 +1,55 @@
+.x-video-control-bottom{
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    z-index: 1;
+    color: #434343;
+    bottom: 5px;
+    }
+.x-video-control-bottom .x-screen-shot-btn,
+.x-video-control-bottom .x-switch-stop-btn,
+.x-video-control-bottom .x-muted-btn,
+.x-video-control-bottom .x-full-screen-btn{cursor: pointer;background: url("./img/viwall_bt_screenshot.png") no-repeat;
+background-size: 14px 14px;display: inline-block;width: 14px;height: 14px;margin-right: 2px;}
+.x-video-control-bottom .x-switch-stop-btn{background-image: url("./img/viwall_bt_stop.png")}
+.x-video-control-bottom .x-switch-play-btn{background-image: url("./img/viwall_bt_play.png")}
+.x-video-control-bottom .x-muted-btn{background-image: url("./img/viwall_bt_voice.png")}
+.x-video-control-bottom .x-muted-cancel-btn{background-image: url("./img/viwall_bt_novoice.png")}
+.x-video-control-bottom .x-full-screen-btn{background-image: url("./img/viwall_bt_fullscreen.png")}
+.x-video-tag::-webkit-media-controls{
+
+    display:none !important;
+
+}
+.x-video-loading{position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    border: 3px solid rgba(255,255,255,.7);
+    top: 28%;
+    top: -webkit-calc(50% - 20px);
+    top: calc(50% - 20px);
+    left: 35%;
+    left: -webkit-calc(50% - 20px);
+    left: calc(50% - 20px);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation: loader1 1s linear infinite;
+    animation: loader1 1s linear infinite}
+.x-video-loading:after{content: "";
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    width: 11px;
+    height: 11px;
+    border-radius: 10px;
+    background-color: #fff;}
+@-webkit-keyframes loader1{
+    0%{-webkit-transform:rotate(0deg);}
+    100%{-webkit-transform:rotate(360deg);}
+}
+
+@keyframes loader1{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}

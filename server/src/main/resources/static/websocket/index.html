@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<meta charset="utf-8"/>
+<title>WebSocket Test</title>
+<script src="../js/ganplayer.js"></script>
+<script src="../js/base.js"></script>
+<div id="output"></div>
+
+<style>
+    .div-inline {
+        display: inline;
+        float: left;
+    }
+</style>
+
+<div>
+    <a>ws_url</a>
+    <input style="width: 300px;height: 30px;" id="ws_url" type="text" value="">
+</div>
+
+<div style="margin-top: 6px"></div>
+
+<div class="div-inline">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video1" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction1()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video1" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video2" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction2()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video2" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div class="div-inline" style="margin-left: 20px">
+    <div>
+        <input style="width: 190px;height: 30px;" id="input_video3" type="text" value="">
+        <button style="width: 100px;height: 40px" onclick="playAction3()">播放</button>
+    </div>
+    <div style="margin-top: 20px">
+        <video controls id="video3" width="300px" height="300px"></video>
+    </div>
+</div>
+
+<div>
+    <div class="div-inline">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video4" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction4()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video4" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video5" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction5()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video5" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video6" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction6()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video6" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+    <div class="div-inline" style="margin-left: 20px">
+        <div>
+            <input style="width: 190px;height: 30px;" id="input_video7" type="text" value="">
+            <button style="width: 100px;height: 40px" onclick="playAction7()">播放</button>
+        </div>
+        <div style="margin-top: 20px">
+            <video controls id="video7" width="300px" height="300px"></video>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    document.getElementById('ws_url').value = "ws://"+window.location.host+"/ws/rtsp";
+    document.getElementById('input_video').value = "rtsp://admin:Ad12345!@192.168.82.32";
+    var mPlayer = [];
+    function playAction() {
+        var url = document.getElementById('ws_url').value;
+        play(0,'video', url, document.getElementById('input_video').value);
+    }
+
+    document.getElementById('input_video1').value = "rtsp://admin:Ad12345!@192.168.82.34";
+    function playAction1() {
+        var url = document.getElementById('ws_url').value;
+        play(1,'video1', url, document.getElementById('input_video1').value);
+    }
+
+    document.getElementById('input_video2').value = "rtsp://admin:admin123@192.168.10.104";
+    function playAction2() {
+        var url = document.getElementById('ws_url').value;
+        play(2,'video2', url, document.getElementById('input_video2').value);
+    }
+
+    document.getElementById('input_video3').value = "rtsp://admin:admin123@192.168.10.102"
+    function playAction3() {
+        var url = document.getElementById('ws_url').value;
+        play(3,'video3', url, document.getElementById('input_video3').value);
+    }
+
+    document.getElementById('input_video4').value = "rtsp://admin:admin@192.168.10.102:51010000001310014454";
+    function playAction4() {
+        var url = document.getElementById('ws_url').value;
+        play(4,'video4', url, document.getElementById('input_video4').value);
+    }
+
+    document.getElementById('input_video5').value = "rtsp://192.168.1.18:655/vag://192.168.1.18:7302:51010100001310013304:0:MAIN:TCP";
+    function playAction5() {
+        var url = document.getElementById('ws_url').value;
+        play(5,'video5', url, document.getElementById('input_video5').value);
+    }
+
+    document.getElementById('input_video6').value = "rtsp://" + getHostWithoutPort() + ":554/800.sdp";
+    function playAction6() {
+        var url = document.getElementById('ws_url').value;
+        play(6,'video6', url, document.getElementById('input_video6').value);
+    }
+
+    document.getElementById('input_video7').value = "rtsp://" + getHostWithoutPort() + ":554/800.sdp";
+    function playAction7() {
+        var url = document.getElementById('ws_url').value;
+        play(7,'video7', url, document.getElementById('input_video7').value);
+    }
+
+    function play(i,videoid,wsUri,rtsp) {
+        var video = document.getElementById(videoid);
+        var player = mPlayer[i];
+        if(player){
+            player.stop();
+        }else{
+            player = mPlayer[i] = new GanPlayer(video,wsUri)
+        }
+        player.play(rtsp);
+    }
+
+</script>
+
+</html>
