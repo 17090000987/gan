@@ -6,9 +6,9 @@ http://{ip}:{port}/player/index.html
 #### 使用说明
 <code>
     
-xplayer =new XPlayer(document.getElementById('video-w'),'ws://116.62.33.55:88/ws/rtsp');
+xplayer =new XPlayer(document.getElementById('video-w'),'ws://{host}/ws/rtsp');
     
-xplayer.play('rtsp://116.62.33.55:554/nvr?deviceID=51010100001310000011&channel=0')
+xplayer.play('rtsp://{host}:554/xxx')
 
 xplayer.onVideoPlay = function () {
     
