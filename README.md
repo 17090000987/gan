@@ -24,10 +24,13 @@ maven parent 执行install执行完成
 1.  把application.yml.tpl 改成application.yml
 2.  根据自己项目使用功能配置 application.yml 
 
-###启动服务
-####windos平台
-直接执行start.bat 
-####linux平台
+##启动服务
+
+###windos平台
+
+直接执行start.bat
+ 
+###linux平台
 1. 首先配置环境 vi envsetup.sh 把版本号修改到最新2.0.0
 2. 启动 
     1. source envsetup.sh 
