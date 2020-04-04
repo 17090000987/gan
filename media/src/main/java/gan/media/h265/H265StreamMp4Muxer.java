@@ -200,10 +200,11 @@ public class H265StreamMp4Muxer extends Mp4MuxerImpl implements MP4StreamMuxer {
                         while(bufferInfo.length>0){
                             int frameLen = HUtils.frameLen(packet.array(),bufferInfo.offset,bufferInfo.length);
                             int frameType = H265Utils.getFrameType(packet.array(), bufferInfo.offset, 5);
-                            if((frameType==H265Utils.Type_VPS)&&!vps){
+                            if((frameType==H265Utils.Type_VPS)){
                                 mByteBufferTemp = ByteBuffer.allocate(MediaApplication.getMediaConfig().rtspFrameBufferSize);
                                 mByteBufferTemp.put(packet.array(),bufferInfo.offset, frameLen);
                                 vps = true;
+                                sps = false;
                             }else if(vps&&(frameType==H265Utils.Type_SPS)&&!sps){
                                 mByteBufferTemp.put(packet.array(),bufferInfo.offset, frameLen);
                                 int startCodeSize = HUtils.startCodeSize(mByteBufferTemp.array(),0,5);
@@ -215,6 +216,7 @@ public class H265StreamMp4Muxer extends Mp4MuxerImpl implements MP4StreamMuxer {
                                     parseSps(mByteBufferTemp.array(), frameLen);
                                 }
                                 sps = true;
+                                pps = false;
                             }else if(sps&&(frameType==H265Utils.Type_PPS)&&!pps){
                                 mByteBufferTemp.put(packet.array(),bufferInfo.offset, frameLen);
                                 pps = true;
