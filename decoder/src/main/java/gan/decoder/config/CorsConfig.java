@@ -1,4 +1,4 @@
-package com.xbcx.decoder.config;
+package gan.decoder.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

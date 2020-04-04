@@ -1,6 +1,6 @@
-package com.xbcx.decoder.config;
+package gan.decoder.config;
 
-import com.xbcx.decoder.web.CaseInsensitiveRequestParameterNameFilter;
+import gan.decoder.web.CaseInsensitiveRequestParameterNameFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

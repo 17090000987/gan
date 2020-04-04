@@ -1,4 +1,4 @@
-package com.xbcx.decoder.config;
+package gan.decoder.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;

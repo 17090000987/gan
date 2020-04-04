@@ -1,4 +1,4 @@
-package com.xbcx.decoder.web.websocket;
+package gan.decoder.web.websocket;
 
 import gan.log.FileLogger;
 import gan.media.MediaInfo;

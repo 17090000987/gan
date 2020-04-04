@@ -1,4 +1,4 @@
-package com.xbcx.decoder.web.websocket;
+package gan.decoder.web.websocket;
 
 import gan.log.DebugLog;
 import gan.log.FileLogger;

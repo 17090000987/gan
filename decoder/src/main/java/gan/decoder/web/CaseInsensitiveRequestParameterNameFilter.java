@@ -1,4 +1,4 @@
-package com.xbcx.decoder.web;
+package gan.decoder.web;
 
 import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.web.filter.OncePerRequestFilter;

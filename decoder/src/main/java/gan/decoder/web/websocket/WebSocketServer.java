@@ -1,7 +1,7 @@
-package com.xbcx.decoder.web.websocket;
+package gan.decoder.web.websocket;
 
 import android.os.JSONObject;
-import com.xbcx.decoder.DecoderApplication;
+import gan.decoder.DecoderApplication;
 import gan.log.DebugLog;
 import gan.log.FileLogger;
 import gan.web.base.Result;

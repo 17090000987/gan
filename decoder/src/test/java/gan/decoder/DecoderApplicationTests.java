@@ -1,4 +1,4 @@
-package com.xbcx.decoder;
+package gan.decoder;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

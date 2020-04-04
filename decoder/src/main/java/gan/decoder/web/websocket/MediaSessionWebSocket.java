@@ -1,4 +1,4 @@
-package com.xbcx.decoder.web.websocket;
+package gan.decoder.web.websocket;
 
 import gan.core.system.SystemUtils;
 import gan.core.system.server.ServerSession;

@@ -1,7 +1,7 @@
-package com.xbcx.decoder;
+package gan.decoder;
 
 import android.os.Looper;
-import com.xbcx.decoder.config.DecoderConfig;
+import gan.decoder.config.DecoderConfig;
 import gan.log.FileLogger;
 import gan.core.utils.TextUtils;
 import gan.media.MediaApplication;
@@ -17,7 +17,7 @@ import java.net.URI;
 import java.net.URLEncoder;
 
 @SpringBootApplication(
-        scanBasePackages = {"gan.web","com.xbcx.decoder.config","com.xbcx.decoder.web"},
+        scanBasePackages = {"gan.web", "gan.decoder.config", "gan.decoder.web"},
         exclude = DataSourceAutoConfiguration.class)
 public class DecoderApplication extends MediaApplication {
 

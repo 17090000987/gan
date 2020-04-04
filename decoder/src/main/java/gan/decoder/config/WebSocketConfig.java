@@ -1,7 +1,7 @@
-package com.xbcx.decoder.config;
+package gan.decoder.config;
 
-import com.xbcx.decoder.web.websocket.WebSocketHandshakeInterceptor;
-import com.xbcx.decoder.web.websocket.WebSocketRtspHandler;
+import gan.decoder.web.websocket.WebSocketHandshakeInterceptor;
+import gan.decoder.web.websocket.WebSocketRtspHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
