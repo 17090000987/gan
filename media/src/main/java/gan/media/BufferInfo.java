@@ -43,6 +43,10 @@ public class BufferInfo extends gan.core.BufferInfo{
         time = 0;
     }
 
+    public int offsetLength(){
+        return length-offset;
+    }
+
     @Override
     public String toString() {
         return super.toString()+",channel:"+channel+",time:"+time;

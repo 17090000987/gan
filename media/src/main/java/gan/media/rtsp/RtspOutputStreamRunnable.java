@@ -37,9 +37,7 @@ public class RtspOutputStreamRunnable extends MediaOutputStreamRunnable1 {
     }
 
     private boolean isIgnorePacket(PacketInfo info){
-        ByteBuffer packet = info.getByteBuffer();
-        BufferInfo bufferInfo = info.getBufferInfo();
-        return isIgnorePacket(bufferInfo.channel,packet.array(),bufferInfo.offset,bufferInfo.length);
+        return isIgnorePacket(info.channel(), info.array(), info.offset(), info.length());
     }
 
     private boolean isIgnorePacket(byte channel, byte[] packet, int offset, int len){

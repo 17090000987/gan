@@ -1,15 +1,14 @@
 package gan.media.parser;
 
-import gan.log.DebugLog;
 import gan.core.StreamHelper;
+import gan.core.system.SystemUtils;
+import gan.log.DebugLog;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 public class RtpOverTcpStreamParser implements StreamParser{
-
-    private final static String Tag = RtpOverTcpStreamParser.class.getName();
 
     int mBufferSize;
     boolean mInputStreaming;
@@ -40,8 +39,8 @@ public class RtpOverTcpStreamParser implements StreamParser{
                     if(read2(is,b1,mInputStreaming)>0){
                         byte channel = b1[0];
                         if(read2(is,b2,mInputStreaming)>0){
-                            short length = ByteBuffer.wrap(b2).getShort();
-                            short len = length;
+                            int length = SystemUtils.byteToUnsignInt16(b2,0);
+                            int len = length;
                             int readLen = 0;
                             packet.clear();
                             while (mInputStreaming&&len>0){
@@ -92,13 +91,13 @@ public class RtpOverTcpStreamParser implements StreamParser{
         return len;
     }
 
-    protected void onTcpPacket(byte channel,ByteBuffer packet,int offset,short length){
+    protected void onTcpPacket(byte channel,ByteBuffer packet,int offset,int length){
         if(mPacketListener!=null){
             mPacketListener.onTcpPacket(channel, packet, offset, length);
         }
     }
 
     public static interface PacketListener{
-        public void onTcpPacket(byte channel,ByteBuffer packet,int offset,short length);
+        public void onTcpPacket(byte channel,ByteBuffer packet,int offset,int length);
     }
 }

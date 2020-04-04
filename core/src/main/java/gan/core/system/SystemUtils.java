@@ -129,6 +129,10 @@ public class SystemUtils {
 		return ((int)b[offset] & 0xFF);
 	}
 
+	public static int byte2UnsignInt8(byte b){
+		return (b & 0xFF);
+	}
+
 	public static int byteToUnsignInt16(byte[] b, int offset){
 		return (byteToUnsignInt8(b, offset) << 8) + (byteToUnsignInt8(b, offset+1));
 	}

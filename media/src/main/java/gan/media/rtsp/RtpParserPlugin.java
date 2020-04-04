@@ -64,13 +64,13 @@ public class RtpParserPlugin extends ServerPlugin<RtspMediaServer> implements Rt
         }
     }
 
-    public void parseVideoFrame(byte channel,ByteBuffer packet, int offset, short length){
+    public void parseVideoFrame(byte channel,ByteBuffer packet, int offset, int length){
         if(mVideoRtpParser!=null){
             mVideoRtpParser.parse(channel,packet,offset,length);
         }
     }
 
-    public void parseAudioFrame(byte channel,ByteBuffer packet,int offset,short length){
+    public void parseAudioFrame(byte channel,ByteBuffer packet,int offset,int length){
         if(mAudioRtpParser!=null){
             mAudioRtpParser.parse(channel,packet,offset,length);
         }

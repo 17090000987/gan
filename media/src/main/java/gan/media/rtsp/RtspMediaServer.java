@@ -421,7 +421,7 @@ public class RtspMediaServer extends MediaServer implements RtspSource{
         if(MediaType.ES.equals(meidaType)){
             return new RtpOverTcpStreamParser(1500, new RtpOverTcpStreamParser.PacketListener() {
                 @Override
-                public void onTcpPacket(byte channel, ByteBuffer packet, int offset, short length) {
+                public void onTcpPacket(byte channel, ByteBuffer packet, int offset, int length) {
                     rtpSessionTimeOut();
                     receiveRtpPacket(channel,packet,offset,length);
                 }
@@ -808,7 +808,7 @@ public class RtspMediaServer extends MediaServer implements RtspSource{
         return playLoad == 97;
     }
 
-    protected void receiveRtpPacket(byte channel,ByteBuffer packet,int offset,short length){
+    protected void receiveRtpPacket(byte channel,ByteBuffer packet,int offset,int length){
         //先把数据转发给各个输出通道
         outputPacketStream(MediaOutputStreamRunnable.PacketType_Rtp, channel,packet.array(),offset,length, 0);
 

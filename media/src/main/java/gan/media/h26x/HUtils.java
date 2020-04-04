@@ -28,6 +28,18 @@ public class HUtils {
         return -1;
     }
 
+    public static int findStartCodeOffset(byte[] data,int offset,int length){
+        int index;
+        for (int i = 0; i < length - 4; i++) {
+            index = i+offset;
+            if ((0 == data[index]) && (0 == data[index + 1])
+                    && ((1 == data[index + 2]) || ((0 == data[index + 2])&&(1 == data[index + 3])))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static int frameLen(byte[] data, int offset, int length){
         int pos0=-1;
         int index;
