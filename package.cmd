@@ -1,7 +1,7 @@
 set OUT_PATH=.\package
 #xcopy jni %OUT_PATH%\jni\ /s/d/e
 xcopy libs %OUT_PATH%\libs\ /s/d/e
-xcopy public/player %OUT_PATH%\public\player\ /s/d/e
+xcopy public %OUT_PATH%\public\ /s/d/e
 #xcopy assets %OUT_PATH%\assets\ /s/d/e
 copy envsetup.sh %OUT_PATH%\
 copy start.sh %OUT_PATH%\
