@@ -204,22 +204,22 @@ public class H264StreamMp4Muxer extends Mp4MuxerImpl implements MP4StreamMuxer {
                     }else{
                         DebugLog.debug("checkKeyFrameAvaible:false");
 
-                        if(SystemServer.IsDebug()){
-                            try{
-                                if(fos==null){
-                                    fos = FileHelper.createFileOutputStream(SystemServer.getRootPath("/logs/mp4"));
-                                }
-                                fos.write(packet.array(),bufferInfo.offset,bufferInfo.length);
-                                fos.flush();
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-                        }
+//                        if(SystemServer.IsDebug()){
+//                            try{
+//                                if(fos==null){
+//                                    fos = FileHelper.createFileOutputStream(SystemServer.getRootPath("/logs/mp4"));
+//                                }
+//                                fos.write(packet.array(),bufferInfo.offset,bufferInfo.length);
+//                                fos.flush();
+//                            }catch (Exception e){
+//                                e.printStackTrace();
+//                            }
+//                        }
 
                         while(bufferInfo.length>0){
                             int frameLen = HUtils.frameLen(packet.array(),bufferInfo.offset,bufferInfo.length);
                             int frameType = H264Utils.getFrameType(packet.array(), bufferInfo.offset, 10);
-                            if((frameType==H264Utils.NAL_SPS)&&!sps){
+                            if((frameType==H264Utils.NAL_SPS)){
                                 DebugLog.debug("cache sps");
                                 mByteBufferTemp = ByteBuffer.allocate(MediaApplication.getMediaConfig().rtspFrameBufferSize);
                                 mByteBufferTemp.put(packet.array(),bufferInfo.offset, frameLen);
@@ -234,6 +234,7 @@ public class H264StreamMp4Muxer extends Mp4MuxerImpl implements MP4StreamMuxer {
                                     parseSps(mByteBufferTemp.array(), frameLen);
                                 }
                                 sps = true;
+                                pps = false;
                             }else if(sps&&(frameType==H264Utils.NAL_PPS)&&!pps){
                                 DebugLog.debug("cache pps");
                                 mByteBufferTemp.put(packet.array(),bufferInfo.offset, frameLen);
