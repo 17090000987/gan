@@ -38,6 +38,7 @@
             this.status = 0;
             this.playing = false;
             this.buffer = [];
+            this.muted = false;
             this.init(el,wsUri);
         }
 
@@ -67,7 +68,7 @@
         }
 
         playFile(url) {
-            this.play(url, 2, 1);
+            this.play(url, 0, 2);
         }
 
         /**
@@ -78,7 +79,7 @@
          * rtsp://116.62.33.55:554/nvr?deviceID=51010100001310000011&channel=0
          * @param type  不填
          */
-        play(rtsp,type=0,hasAudio=0) {
+        play(rtsp, hasAudio=0,type=0) {
             console.log("url:" + rtsp + ",play");
             this.url = rtsp;
             this.hasAudio=hasAudio;
@@ -191,7 +192,7 @@
             this.removeVideoElement();
             var video= this.video = document.createElement("video");
             this.video.autoplay = true;
-            this.video.muted = true;
+            this.video.muted = this.muted;
             this.video.style.width = '100%';
             this.video.style.height = '100%';
             this.video.style.muted = true;
@@ -201,7 +202,7 @@
                 return false
             }
             this.video.oncanplay=function () {
-                video.muted = true;
+                video.muted = this.muted;
                 video.play();
             }
             if (!this.fixSize) {
@@ -218,11 +219,19 @@
                 this.video.src = URL.createObjectURL(this.mediaSource);
                 this.playing = true;
                 this.onVideoEvent(0, 0, "h264 started");
-                this.video.muted = true;
+                this.video.muted = this.muted;
                 this.video.play();
             } else {
                 this.onVideoEvent(1, 3, "错误:3");
                 console.error("Unsupported MIME type or codec: ", this.mimeCodec);
+            }
+        }
+
+        muted(muted){
+            this.muted = muted;
+            if(this.video){
+                this.video.muted = muted;
+                this.video.play();
             }
         }
 
@@ -773,8 +782,9 @@
         changeLayoutSize(){
             this.player.changeLayoutSize();
         }
-
-
+        seek(time_start, time_end = ""){
+            this.player.seek(time_start, time_end);
+        }
     }
 
 })();
