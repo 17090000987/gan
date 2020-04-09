@@ -5,10 +5,12 @@ import gan.media.MediaConfig;
 
 public class Fmp4 {
 
-    final static String Tag = Fmp4.class.getName();
-
     static{
-        System.loadLibrary("fmp4");
+        try{
+            System.loadLibrary("fmp4");
+        }catch (Throwable e){
+            e.printStackTrace();
+        }
     }
 
     private long handle;

@@ -58,10 +58,10 @@ public class SystemServer {
 		mRootPath = new File("").getAbsolutePath();
 		DebugLog.info("rootPath:"+mRootPath);
 		final String libPath = getRootPath("/libs");
+		final String libWindows = getRootPath("/libs/windows");
 		if(FileHelper.checkOrCreateFolder(libPath)){
             try {
-				DebugLog.info("addLibraryDir path:"+libPath);
-                addLibraryDir(libPath);
+                addLibraryDir(libPath,libWindows);
             } catch (Exception e) {
                 e.printStackTrace();
                 DebugLog.warn("addLibraryDir e:"+e.getMessage());
@@ -172,19 +172,24 @@ public class SystemServer {
 		executorService.execute(run);
 	}
 
-	protected static void addLibraryDir(String libraryPath) throws Exception {
+	protected static void addLibraryDir(String... libraryPaths) throws Exception {
 		Field userPathsField = ClassLoader.class.getDeclaredField("usr_paths");
 		userPathsField.setAccessible(true);
 		String[] paths = (String[]) userPathsField.get(null);
 		StringBuilder sb = new StringBuilder();
 		String suffix = SystemUtils.isWindows()?";":":";
 		for (int i = 0; i < paths.length; i++) {
-			if (libraryPath.equals(paths[i])) {
-				return;
-			}
 			sb.append(paths[i]).append(suffix);
 		}
-		sb.append(libraryPath);
+		for(String libraryPath:libraryPaths){
+			if(sb.indexOf(libraryPath)<0){
+				sb.append(libraryPath).append(suffix);
+			}
+		}
+		if(SystemUtils.isWindows()){
+			sb.append(";.");
+		}
+		DebugLog.info("addLibraryDir path:%s", sb.toString());
 		System.setProperty("java.library.path", sb.toString());
 		final Field sysPathsField = ClassLoader.class.getDeclaredField("sys_paths");
 		sysPathsField.setAccessible(true);
