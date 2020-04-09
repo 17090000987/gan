@@ -186,9 +186,6 @@ public class SystemServer {
 				sb.append(libraryPath).append(suffix);
 			}
 		}
-		if(SystemUtils.isWindows()){
-			sb.append(";.");
-		}
 		DebugLog.info("addLibraryDir path:%s", sb.toString());
 		System.setProperty("java.library.path", sb.toString());
 		final Field sysPathsField = ClassLoader.class.getDeclaredField("sys_paths");
