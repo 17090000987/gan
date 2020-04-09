@@ -1,8 +1,8 @@
 package gan.media.rtsp;
 
-import gan.log.DebugLog;
-import gan.core.utils.TextUtils;
 import gan.core.system.SystemUtils;
+import gan.core.utils.TextUtils;
+import gan.log.DebugLog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,10 +12,10 @@ import java.util.WeakHashMap;
 
 public class RtspSdpParser {
 
-    private final static String Tag = RtspSdpParser.class.getName();
     private String mSdp;
+    private String mServerIp;
     private WeakHashMap<String,String> mMapValues = new WeakHashMap<>();
-    private ArrayList<Integer> trackIds = new ArrayList<>();
+    private ArrayList<String> trackIds = new ArrayList<>();
     private ArrayList<String> medias = new ArrayList<>();
 
     public void parserSdp(String sdpStr)throws IOException {
@@ -27,33 +27,57 @@ public class RtspSdpParser {
             while((line=br.readLine())!=null){
                 if(line.startsWith("m=")){
                     if(sb!=null){
-                        String media = sb.toString();
-                        medias.add(media);
+                        String media = sb.toString().trim();
                         DebugLog.info("media:"+media);
+                        medias.add(media);
                     }
                     sb = new StringBuffer();
                 }
                 if(sb!=null){
                     sb.append(line).append("\r\n");
                 }
-                String key = "trackID=";
-                int index = line.indexOf(key);
-                if(index>0){
-                    int beginIndex = index+key.length();
-                    try{
-                        trackIds.add(Integer.valueOf(line.substring(beginIndex,beginIndex+1)));
-                    }catch (Exception e){
-                        trackIds.add(0);
-                    }
-                }
+
+                parseServerIp(line);
+                parseTrack(line);
             }
             if(sb!=null){
-                String media = sb.toString();
-                medias.add(media);
+                String media = sb.toString().trim();
                 DebugLog.info("media:"+media);
+                medias.add(media);
             }
         } finally {
             SystemUtils.close(br);
+        }
+    }
+
+    public String getServerIp() {
+        return mServerIp;
+    }
+
+    public void parseServerIp(String line){
+        try{
+            if(line.startsWith("o=")){
+                String key = "IN IP4";
+                int index = line.indexOf(key);
+                if(index>0){
+                    mServerIp = line.substring(index+key.length(),
+                            line.length()).trim();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void parseTrack(String line){
+        try{
+            String key = "track";
+            int index = line.indexOf(key);
+            if(index>0){
+                trackIds.add(line.substring(index,line.length()).trim());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -111,7 +135,7 @@ public class RtspSdpParser {
 
     public String getMedia(String key){
         for(String media:medias){
-            if (media.contains(key)) {
+            if (media.contains(key.trim())) {
                 return media;
             }
         }
@@ -161,7 +185,7 @@ public class RtspSdpParser {
         return null;
     }
 
-    public ArrayList<Integer> getTrackIds(){
+    public ArrayList<String> getTrackIds(){
         return trackIds;
     }
 

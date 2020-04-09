@@ -1,13 +1,13 @@
 package gan.media.rtsp;
 
 import android.os.Handler;
-import gan.log.DebugLog;
-import gan.log.FileLogger;
-import gan.core.utils.TextUtils;
+import gan.core.system.server.SystemServer;
 import gan.core.utils.Base64;
 import gan.core.utils.Encrypter;
+import gan.core.utils.TextUtils;
+import gan.log.DebugLog;
+import gan.log.FileLogger;
 import gan.network.NetParamsMap;
-import gan.core.system.server.SystemServer;
 
 import java.io.*;
 import java.net.*;
@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 
 public class RtspConnection implements Closeable{
 
-	private final static String TAG = RtspConnection.class.getName();
     final static String charsetName = "UTF-8";
     final static String end = "\r\n";
 
@@ -99,8 +98,7 @@ public class RtspConnection implements Closeable{
 	}
 
 	public FileLogger initLogger(){
-		return mLogger = FileLogger.getInstance("/rtsp/"+URLEncoder.encode(mHost))
-				.setLogcat(SystemServer.IsDebug());
+		return mLogger = FileLogger.getInstance("/rtsp/"+URLEncoder.encode(mHost));
 	}
 
 	public void close() throws IOException {
@@ -318,8 +316,6 @@ public class RtspConnection implements Closeable{
 			try {
 				m = Response.rexegAuthenticate.matcher(response.headers.get("www-authenticate"));
 				m.find();
-				nonce = m.group(2);
-				realm = m.group(1);
 			} catch (Exception e) {
 				throw new IOException("Invalid response from server");
 			}
@@ -362,7 +358,10 @@ public class RtspConnection implements Closeable{
             if (i == 0){
             	try {
             		String session = response.headers.get("session").trim();
-                    mSessionID = parseSession(session);
+                    String sessionID = parseSession(session);
+                    if(!TextUtils.isEmpty(sessionID)){
+                    	mSessionID = sessionID;
+					}
                     mTimeOut = parseTimeOut(session);
 					mLogger.log("mSessionID: "+ mSessionID+ "response.status:"+response.status);
                 } catch (Exception e) {  
@@ -402,8 +401,27 @@ public class RtspConnection implements Closeable{
 		return 60;
 	}
 
-	public Collection<Integer> getTrackIds() {
+	public Collection<String> getTrackIds() {
 		return mRtspSdpParser.getTrackIds();
+	}
+
+	public String findServerUrl(){
+    	final String serverIp = mRtspSdpParser.getServerIp();
+    	if(TextUtils.isEmpty(serverIp)){
+			return mUrl;
+		}
+		if("0.0.0.0".equals(serverIp)
+				||"127.0.0.1".equals(serverIp)){
+			return mUrl;
+		}
+		try{
+			URI uri = URI.create(mUrl);
+			String host = uri.getHost();
+			return mUrl.replace(host,serverIp);
+		}catch (Exception e){
+    		e.printStackTrace();
+    		return mUrl;
+		}
 	}
 
 	/**
@@ -413,35 +431,41 @@ public class RtspConnection implements Closeable{
 	 * @throws IOException
 	 */
 	public boolean sendRequestSetup2() throws IllegalStateException, IOException {
-		ArrayList<Integer> trackIds = mRtspSdpParser.getTrackIds();
+		ArrayList<String> trackIds = mRtspSdpParser.getTrackIds();
 		if(trackIds==null||trackIds.isEmpty()){
 			trackIds = new ArrayList<>();
-			trackIds.add(0);
-			trackIds.add(1);
+			trackIds.add("trackId=0");
+			trackIds.add("trackId=1");
 		}
 
 		int index = 0;
-		for (int trackId:trackIds) {
+		for (String trackId:trackIds) {
 			String interleaved = index+"-"+(++index);
 			index++;
-			String request = "SETUP "+ mUrl +"/trackID="+trackId+" RTSP/1.0\r\n"
-					+"Transport: RTP/AVP/TCP;unicast;interleaved="+interleaved+"\r\n"
-					+"x-Dynamic-Rate: 0\r\n"
-					+ addHeaders()
-                    + authorization("SETUP")
-                    + end;
-
+			StringBuffer sb = new StringBuffer();
+			sb.append(String.format("SETUP %s/%s RTSP/1.0",findServerUrl(),trackId)).append(end)
+					.append(addHeaders()).append(authorization("SETUP"))
+					.append(String.format("Transport: RTP/AVP/TCP;unicast;interleaved=%s", interleaved)).append(end)
+					//.append("x-Dynamic-Rate: 0").append(end)
+					.append(end);
+			String request = sb.toString();
 			mLogger.log("request:%s",request);
 			mOutputStream.write(request.getBytes("UTF-8"));
 			Response response = Response.parseResponse(mBufferedReader);
 			mLogger.log("response:%s",response.status);
 			try {
-				String session = response.headers.get("session").trim();
-				mSessionID = parseSession(session);
-				mTimeOut = parseTimeOut(session);
-				mLogger.log("mSessionID: "+ mSessionID+ ",response.status:"+response.status);
+				String session = response.headers.get("session");
+				if(session!=null){
+					session = session.trim();
+					String sessionID = parseSession(session);
+					if(!TextUtils.isEmpty(sessionID)){
+						mSessionID = sessionID;
+					}
+					mTimeOut = parseTimeOut(session);
+					mLogger.log("mSessionID: "+ mSessionID+ ",response.status:"+response.status);
+				}
 			} catch (Exception e) {
-				throw new IOException("Invalid response from server. Session id: "+mSessionID);
+				e.printStackTrace();
 			}
 			if (response.status != 200){
 				mLogger.log("return for resp :%s", response.status);
@@ -455,7 +479,7 @@ public class RtspConnection implements Closeable{
      * Forges and sends the RECORD request  
      */  
     public boolean sendRequestPlay() throws IllegalStateException, SocketException, IOException {  
-        String request = "PLAY "+ mUrl +" RTSP/1.0\r\n" +
+        String request = "PLAY "+ findServerUrl() +" RTSP/1.0\r\n" +
 				"Range: npt=0.000-\r\n" +
                 addHeaders()+
                 authorization("PLAY")+
