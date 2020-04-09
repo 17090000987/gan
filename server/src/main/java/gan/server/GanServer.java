@@ -33,10 +33,13 @@ public class GanServer extends MediaApplication {
         Logger.getLogger(GanServer.class.getName()).info("main start");
         Thread.currentThread().setName("main");
         Looper.prepareMainLooper();
-        ApplicationContext context = new SpringApplicationBuilder(GanServer.class)
-                .run(args);
-        SystemServer.getInstance().create(context);
-        Looper.loop();
+        try{
+            ApplicationContext context = new SpringApplicationBuilder(GanServer.class)
+                    .run(args);
+            SystemServer.getInstance().create(context);
+        }finally {
+            Looper.loop();
+        }
     }
 
     @Autowired
